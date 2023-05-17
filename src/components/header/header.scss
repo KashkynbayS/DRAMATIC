@@ -1,0 +1,144 @@
+@use "../../scss/" as *;
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 600;
+
+    @include flex(center, unset);
+
+    img {
+        // margin-right: 10px;
+        width: 180px;
+
+        @include mobile {
+            width: 30px;
+            margin-right: 0;
+        }
+    }
+}
+
+.header {
+    height: $header-height;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    background: linear-gradient(90.53deg, rgba(0, 0, 0, 0.75) 0.45%, rgba(102, 80, 165, 0.75) 105.51%);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+    // transition: height 0.3s ease, background-color 0.3s ease;
+
+    // &.shrink {
+    //     height: $header-shrink-height;
+    //     background-color: $body-bg;
+    // }
+
+    &__wrap {
+        @include flex(center, space-between);
+        height: 100%;
+        padding: 0 2rem;
+
+        @include mobile {
+            justify-content: center;
+        }
+    }
+
+    &__nav {
+        @include flex(center, unset);
+
+        gap: 40px;
+
+        li {
+            padding: 5px 0;
+            font-weight: 700;
+            position: relative;
+            font-size: 16px;
+            line-height: 20px;
+            color: #A1B1CB;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 30px;
+                left: 50%;
+                margin: auto;
+                width: 0;
+                border-radius: 30px;
+                background-color: #38BBD8;
+            }
+            &.active {
+                color: #fff;
+            }
+            &.active::after {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+    @media (max-width: 1400px) {
+        &__nav {
+            gap: 25px;
+            li {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.search-block { 
+    width: 350px;
+    height: 37px;
+    background: #3B567D;
+    border-radius: 18.5px;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    input {
+
+        &::placeholder {
+            color: #A2B3CD;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1400px) {
+            &::placeholder {
+                font-size: 14px;
+            }
+        }
+    }
+    button {
+        background-color: #38bbd800;
+        border: 0;
+
+        @media (max-width: 1400px) {
+            img {
+                width: 18px;
+            }
+        }
+        
+    }
+}
+
+.active-profile-label {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+}
+
+.header__block__child {
+    display: flex;
+    gap: 100px;
+    align-items: center;
+}
+
+@media (max-width: 1400px) {
+    .header__block__child {
+        gap: 50px;
+    }
+    .search-block { 
+        width: 250px;
+    }
+}

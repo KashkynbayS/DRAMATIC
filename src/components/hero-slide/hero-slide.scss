@@ -1,0 +1,164 @@
+@use "../../scss/" as *;
+
+.hero-slide {
+    margin-bottom: 3rem;
+}
+
+.hero-slide__item {
+    padding: 15rem 0;
+    position: relative;
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // @include overlay();
+        background: linear-gradient(to right, #0f0f0f, #0f0f0fe7, #0f0f0f67, #0f0f0f98, #0f0f0f90, #0f0f0f9d);
+        
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background-image: linear-gradient(to top, $body-bg, rgba($black, 0));
+        // background-image: linear-gradient(to top, #000000, #000000b6, #00000070, #b9b9b900, #ffffff00);
+        backdrop-filter: blur(12.5px);
+    }
+
+    &__content {
+        @include flex(center, left);
+        position: relative;
+        height: 400px;
+
+        &__info {
+            width: 55%;
+            padding: 0 3rem;
+            position: relative;
+
+            @include tablet {
+                width: 100%;
+            }
+
+            & > * ~ * {
+                margin-top: 3rem;
+            }
+
+            .title {
+                font-size: 5rem;
+                font-weight: 700;
+                line-height: 1;
+
+                @include tablet {
+                    font-size: 4rem;
+                }
+            }
+
+            .overview {
+                font-weight: 700;
+                font-size: 16px;
+            }
+
+            .btns > * ~ * {
+                margin-left: 1rem;
+            }
+
+            .btns,
+            .title,
+            .overview {
+                opacity: 0;
+                transform: translateY(-100px);
+                transition: transform 0.5s ease, opacity 0.5s ease;
+            }
+        }
+
+        &__poster {
+            flex: 1;
+            @include flex(center, flex-start);
+            position: relative;
+
+            img {
+                width: 400px;
+                border-radius: $border-radius;
+                box-shadow: $box-shadow;
+
+                transform: scale(0);
+                transition: transform 0.7s ease;
+            }
+
+            @include tablet {
+                display: none;
+            }
+        }
+    }
+
+    &.active > &__content > &__content__poster {
+        img {
+            transform: scale(1);
+        }
+    }
+
+    &.active > &__content > &__content__info {
+        .btns,
+        .title,
+        .overview {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .title {
+            transition-delay: 0.3s, 0.3s;
+        }
+
+        .overview {
+            transition-delay: 0.6s, 0.6s;
+        }
+
+        .btns {
+            transition-delay: 0.9s, 0.9s;
+        }
+    }
+}
+
+.left-panel {
+    position: absolute;
+    // height: 315px;
+    left: 0px;
+    top: 125px;
+    background: linear-gradient(2.87deg, #130B29 9.89%, #5436A9 100%, #5E47A1 100%);
+    border-radius: 0 26px 26px 0;
+    display: flex;
+    justify-content: right;
+    padding: 45px 27px;
+    z-index: 100;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+
+        @media (max-width: 1400px) {
+            img {
+                width: 80%;
+            }
+        }
+    }
+}
+
+@media (max-width: 1400px) {
+    .left-panel {
+        padding: 40px 20px;
+    }
+}
